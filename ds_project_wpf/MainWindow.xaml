@@ -1,0 +1,87 @@
+﻿<Window x:Class="ds_project_wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ds_project_wpf"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="MainWindow" Height="550" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--#region Color border-->
+        <Border 
+                Style="{StaticResource ColorfulBorder}"
+                MouseDown="Border_MouseDown">
+
+            <Grid HorizontalAlignment="Stretch">
+
+                <StackPanel HorizontalAlignment="Left"
+                            Orientation="Horizontal"
+                            Margin="0,0,0,0">
+                    <Button Height="20" Content="Storage View"
+                            Background = "Transparent"
+                            BorderThickness="0"
+                            Foreground="Black"
+                            FontWeight="Normal"
+                            Click="Get_Storage_View"
+                            Margin="5,0,0,0"
+                            />
+                    <Button Height="20" Content="Customer View"
+                            Background = "Transparent"
+                            BorderThickness="0"
+                            Foreground="Black"
+                            FontWeight="Normal"
+                            Click="Get_Customer_View"
+                            Margin="5,0,0,0"
+                            />
+                </StackPanel>
+
+                <!--#region Controls in up right corner-->
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            Margin="0,0,5,0">
+
+                    <Button Width="20" Height="20" Content="下"
+                            Background = "Transparent"
+                            BorderThickness="0"
+                            Foreground="Black"
+                            FontWeight="Normal"
+                            Click="ButtonMinimize_Click"
+                            />
+
+                    <Button Width="20" Height="20" Content="◻"
+                            Background = "Transparent"
+                            BorderThickness="0"
+                            Foreground="Black"
+                            FontSize="15"
+                            FontWeight="Light"
+                            Margin="0,0,0,3"
+                            Click="ButtonWindowState_Click"
+                            />
+
+                    <Button Width="20" Height="20" Content="✕"
+                            Background = "Transparent"
+                            BorderThickness="0"
+                            Foreground="Black"
+                            FontWeight="Light"
+                            Click="ButtonClose_Click"
+                            />
+                </StackPanel>
+                <!--#endregion-->
+
+            </Grid>
+
+        </Border>
+        <!--#endregion-->
+
+        <Frame
+            Grid.Row="1"
+            NavigationUIVisibility="Hidden"
+            x:Name="MainFrame"/>
+    </Grid>
+</Window>

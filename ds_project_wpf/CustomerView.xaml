@@ -1,0 +1,336 @@
+﻿<Page x:Class="ds_project_wpf.CustomerView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ds_project_wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="415" d:DesignWidth="900"
+      Background="{StaticResource LightBGColorBrush}"
+      Title="StorageView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+
+        <!--#region side menu-->
+        <Grid Background="{StaticResource DarkBGColorBrush}"
+              Grid.Row="0" Grid.Column="2"
+              Grid.RowSpan="4">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="58"/>
+                <RowDefinition/>
+                <RowDefinition Height="58"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <DockPanel Margin="5" >
+                <Label
+                x:Name="CustomerLabel"
+                Width="120"
+                HorizontalAlignment="Left"
+                Foreground="{StaticResource MainBrightColorBrush}"
+                />
+                <Button
+                    Visibility="Hidden"
+                    HorizontalAlignment="Right"
+                    Content="Edit user info"
+                    FontSize="13"
+                    Margin="10,10"
+                    Style="{StaticResource ResourceKey=TappButton}" Height="28" Width="136" Click="AddBtn_Click"
+                    />
+            </DockPanel>
+            
+            <StackPanel Grid.Row="1">
+                <ComboBox 
+                Margin="15,5"
+                x:Name="PurchasePanel"  
+                DropDownClosed="PurchasePanel_DropDownClosed">
+                </ComboBox>
+                <Button
+                    Content="New Order"
+                    FontSize="13"
+                    Width="85"
+                    HorizontalAlignment="Right"
+                    Height="26"
+                    Margin="15,5"
+                    Click="New_Purchase"
+                    Style="{StaticResource ResourceKey=TappButton}"
+                    />
+                
+                <Label
+                Content="Items:"
+                HorizontalAlignment="Left"
+                Foreground="White"
+                Margin="10,0"
+                />
+
+                <DataGrid
+                    Margin="5"
+                    FontSize="13"
+                    HeadersVisibility="None"
+                    GridLinesVisibility="None"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="True"
+                    x:Name="ItemsDG">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn
+                            x:Name="BtnCol">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content=" + " 
+                                        Click="Add_Click"/>
+                                        <Button Content="  -  " 
+                                        Click="Delete_Click"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    <DataGridTextColumn
+                        x:Name="QuantityCol"
+                        Width="20"
+                    />
+                        <DataGridTextColumn
+                        x:Name="InterpretCol"
+                        Header="Interpret"
+                        Width="*"
+                    />
+                    <DataGridTextColumn
+                        x:Name="AlbumCol"
+                        Header="Album"
+                        Width="*"
+                    />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+            <StackPanel x:Name="OrderPanel"
+                        Visibility="Hidden"
+                        Grid.Row="2"
+                        Orientation="Horizontal"
+                        Margin="0"
+                        >
+                <Button
+                    Content="Order"
+                    FontSize="13"
+                    Margin="10,10"
+                    Style="{StaticResource ResourceKey=TappButton}"
+                    Height="28" Width="136" Click="Order_Purchase"
+                    />
+                <Button
+                    HorizontalAlignment="Right"
+                    Content="Delete"
+                    FontSize="13"
+                    Margin="0,10"
+                    Style="{StaticResource ResourceKey=TappButton}"
+                    Height="28" Width="136" Click="Delete_Purchase"
+                    />
+            </StackPanel>
+
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Upper menu-->
+        <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Background="{StaticResource DarkBGColorBrush}">
+
+            <Grid HorizontalAlignment="Stretch">
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                </StackPanel>
+                <!--#endregion-->
+            </Grid>
+        </Border>
+        <!--#endregion-->
+
+
+        <Grid
+            Grid.Row="1"
+            Grid.ColumnSpan="2">
+            <StackPanel>
+                    <Label Content="TRENDS"
+                   FontWeight="DemiBold"
+                   Foreground="{StaticResource TempBrightColorBrush}"
+                   />
+                    <Label Content="THIS WEEK"
+                       FontWeight="DemiBold"
+                   Foreground="{StaticResource TempBrightColorBrush}"
+                   />
+                </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button
+                    x:Name="Trend1"
+                    FontSize="13"
+                    Margin="10,10"
+                Background="{StaticResource TempBrightColorBrush}"
+                    Style="{StaticResource ResourceKey=TappButton}"
+                    Width="120"
+                    Click="SetTrend"
+                    />
+                <Button
+                    x:Name="Trend2"
+                    FontSize="13"
+                    Margin="10,10"
+                Background="{StaticResource TempBrightColorBrush}"
+                    Style="{StaticResource ResourceKey=TappButton}"
+                    Width="120"
+                    Click="SetTrend"
+                    />
+                <Button
+                    x:Name="Trend3"
+                    FontSize="13"
+                    Margin="10,10"
+                    Background="{StaticResource TempBrightColorBrush}"
+                    Style="{StaticResource ResourceKey=TappButton}"
+                    Width="120"
+                    Click="SetTrend"
+                    />
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="2">
+            <DockPanel Margin="5">
+                <Label Content="Name:" Width="90"/>
+                <TextBox
+                x:Name="Filter_AlbumName"
+                Text="{Binding Name}"/>
+            </DockPanel>
+            <DockPanel Margin="5">
+                <Label Content="Max price ($):" Width="90"/>
+                <TextBox 
+                x:Name="Filter_MaxPrice"
+                Width="70"
+                HorizontalAlignment="Left"
+                TextAlignment="Right"
+                Text="{Binding Current_price, StringFormat={}{0:00#}}"></TextBox>
+            </DockPanel>
+            <DockPanel Margin="5">
+                <Label Content="Released after:" Width="90"/>
+                <DatePicker x:Name="Filter_DateAfter"/>
+            </DockPanel>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="1"
+                    >
+            <DockPanel Margin="5">
+                <Label Content="Interpret name:" Width="90"/>
+                <TextBox
+                x:Name="Filter_InterpretName"/>
+            </DockPanel>
+            <DockPanel Margin="5">
+                <Label Content="Nationality:" Width="90"/>
+                <TextBox
+                x:Name="Filter_InterpretNationality"/>
+            </DockPanel>
+
+            <Button
+                    HorizontalAlignment="Right"
+                    Content="Search"
+                    FontSize="13"
+                    Margin="10,10"
+                    Style="{StaticResource ResourceKey=TappButton}"
+                    Height="28" Width="80" Click="Search"
+                    />
+        </StackPanel>
+
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition x:Name="SelectedCol" Width="0"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Margin="5">
+                <DataGrid
+                    Margin="5"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="True"
+                    SelectedCellsChanged="AlbumsDG_SelectedCellsChanged"
+                    x:Name="AlbumsDG">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                        x:Name="Album_AlbumCol"
+                        Header="Album"
+                        Width="*"
+                    />
+                        <DataGridTextColumn
+                        x:Name="Album_InterpretCol"
+                        Header="Interpret"
+                        Width="*"
+                    />
+                        <DataGridTextColumn
+                        x:Name="Album_PriceCol"
+                        Header="Price"
+                        Width="*"
+                    />
+                        <DataGridTextColumn
+                        x:Name="Album_QuantityCol"
+                        Header="Available"
+                        Width="*"
+                    />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Border
+                CornerRadius="6" BorderBrush="Gray" Background="LightGray"
+                Grid.Column="1" Margin="10">
+                <StackPanel >
+                    <TextBox x:Name="SelectedTitle"
+                             IsReadOnly="True"
+                             TextWrapping="Wrap"
+                             Margin="10" TextAlignment="Center"/>
+                    <TextBox x:Name="SelectedDescription"
+                             IsReadOnly="True"
+                             TextWrapping="Wrap"
+                             Margin="10" Height="53"/>
+                    
+                    <Grid Margin="5">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="SelectedPrice"
+                                 Margin="10"
+                                 IsReadOnly="True"
+                                 TextWrapping="Wrap"
+                                 TextAlignment="Center"
+                                 />
+
+                        <Button Height="20"
+                            Grid.Row="0" Grid.Column="1"
+                            Content="Purchase"
+                            FontSize="10"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ResourceKey=TappButton}"
+                    
+                            Margin="5"
+                            Click="AddToPurchase"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>
